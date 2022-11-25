@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 import furniture from '../../images/Furniture-store-2.gif';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const SignUp = () => {
+    useTitle('Sign Up');
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
