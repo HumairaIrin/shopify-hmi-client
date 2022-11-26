@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../images/logo.png'
+import logo from '../../../images/logo.png';
+import { FaUser } from 'react-icons/fa';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    };
+
     const menuItems = <>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/appointment">Appointment</Link></li>
-        <li><Link to="/about">About</Link></li>
-        {/* {user?.uid ? */}
-        <>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><button >Sign Out</button></li>
-        </>
-        : <li><Link to="/login">Login</Link></li>
-        {/* } */}
+        {user?.email ?
+            <>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><button onClick={handleLogOut} >Sign Out</button></li>
+                {user?.photoURL ?
+                    <p><img className='w-[2rem] h-[2rem] rounded-full' src={user?.photoURL} alt="" /></p>
+                    : <FaUser />
+                }
+            </>
+            : <li><Link to="/login">Login</Link></li>
+        }
     </>
     return (
-        <div className="navbar bg-base-100 flex justify-between w-[90%] mx-auto">
+        <div className="navbar bg-base-100 flex justify-between w-[90%] mb-5 mx-auto">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,7 +40,7 @@ const Navbar = () => {
                 <img className='w-[30%]' src={logo} alt="" />
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal p-0">
+                <ul className="menu menu-horizontal items-center p-0">
                     {menuItems}
                 </ul>
             </div>

@@ -46,17 +46,15 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit(handleSignup)}>
                         <div className="form-control mb-2 w-full max-w-xs">
                             <label className="label font-semibold"><span className="label-text">Name</span></label>
-                            <input type="text" {...register("name", {
-                                required: 'Name is required'
-                            })} className="input input-bordered w-full max-w-xs" />
-                            {errors.name && <p className='text-red-400'>{errors.name?.message}</p>}
+                            <input type="text" {...register("name", { required: 'Name is required' })} className="input input-bordered w-full max-w-xs" />
+                            {errors.name && <p className='text-red-400 mt-1'>{errors.name?.message}</p>}
                         </div>
                         <div className="form-control mb-2 w-full max-w-xs">
                             <label className="label font-semibold"><span className="label-text">Email</span></label>
                             <input type="text" {...register("email", { required: "Email is required" })} className="input input-bordered w-full max-w-xs" />
-                            {errors.email && <p className='text-red-400'>{errors.email?.message}</p>}
+                            {errors.email && <p className='text-red-400 mt-1'>{errors.email?.message}</p>}
                         </div>
-                        <div className="form-control w-full max-w-xs">
+                        <div className="form-control mb-2 w-full max-w-xs">
                             <label className="label font-semibold"><span className="label-text">Password</span></label>
                             <input type="password"
                                 {...register("password",
@@ -67,7 +65,17 @@ const SignUp = () => {
                                     })
                                 }
                                 className="input input-bordered w-full max-w-xs" />
-                            {errors.password && <p className='text-red-400'>{errors.password?.message}</p>}
+                            {errors.password && <p className='text-red-400 mt-1'>{errors.password?.message}</p>}
+                        </div>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Continue account as:</span>
+                            </label>
+                            <select {...register('AccountType')} className="select select-bordered">
+                                <option disabled >select option user or buyer</option>
+                                <option>User</option>
+                                <option>Seller</option>
+                            </select>
                         </div>
                         <input type="submit" value='Sign Up' className='btn btn-primary text-white font-semibold w-full max-w-xs mt-10' />
                     </form>
