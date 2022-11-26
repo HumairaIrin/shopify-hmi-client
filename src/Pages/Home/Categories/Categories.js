@@ -21,15 +21,17 @@ const Categories = () => {
     ]
 
     return (
-        <div className='w-4/5 mx-auto'>
+        <div className='w-4/5 mx-auto mb-12'>
             <h2 className='text-3xl font-bold mb-4'>Categories</h2>
-            <div className='grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-                {
-                    categories.map((category, i) => <Category
-                        key={i}
-                        category={category}>
-                    </Category>)
-                }
+            <div className='overflow-x-auto'>
+                <div className='grid gap-36 sm:gap-4 grid-cols-3'>
+                    {
+                        categories.map((category, i) => <Category
+                            key={i}
+                            category={category}>
+                        </Category>)
+                    }
+                </div>
             </div>
         </div>
     );
