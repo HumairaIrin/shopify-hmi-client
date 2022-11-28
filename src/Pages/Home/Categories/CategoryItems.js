@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import BookingModal from '../../BookingModal/BookingModal';
 import CategoryItem from './CategoryItem';
 
 const CategoryItems = () => {
@@ -19,6 +20,7 @@ const CategoryItems = () => {
     ];
 
     const products = useLoaderData();
+    const [productBooking, setProductBooking] = useState(null);
 
     return (
         <section className='w-[90%] mx-auto'>
@@ -39,10 +41,17 @@ const CategoryItems = () => {
                 {
                     products.map((product, i) => <CategoryItem
                         key={i}
-                        product={product}>
+                        product={product}
+                        setProductBooking={setProductBooking}>
                     </CategoryItem>)
                 }
             </div>
+            {
+                productBooking &&
+                <BookingModal
+                    productBooking={productBooking}
+                    setProductBooking={setProductBooking}></BookingModal>
+            }
         </section>
     );
 };
