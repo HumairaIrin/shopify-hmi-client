@@ -35,7 +35,7 @@ const CategoryItems = () => {
                 }
             </div>
             <hr style={{ color: '#acc396', height: '2px' }} className='my-8' />
-            <div className='grid gap-4 grid-cols-1 lg:grid-cols-2'>
+            <div className='grid gap-4 grid-cols-1 md:grid-cols-2'>
                 {
                     products.map((product, i) => <CategoryItem
                         key={i}
