@@ -21,7 +21,7 @@ const CategoryItems = () => {
 
     const products = useLoaderData();
     const [productBooking, setProductBooking] = useState(null);
-
+    // console.log(productBooking)
     return (
         <section className='w-[90%] mx-auto'>
             <h5 className='text-xl font-semibold mb-2'>Categories :</h5>
