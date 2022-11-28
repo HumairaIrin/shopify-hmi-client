@@ -17,6 +17,7 @@ const Navbar = () => {
         {user?.email ?
             <>
                 <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/blogs">Blogs</Link></li>
                 <li><button onClick={handleLogOut} >Sign Out</button></li>
                 {user?.photoURL ?
                     <p><img className='w-[2rem] h-[2rem] rounded-full' src={user?.photoURL} alt="" /></p>
