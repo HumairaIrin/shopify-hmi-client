@@ -3,26 +3,28 @@ import { Link, useLoaderData } from 'react-router-dom';
 import BookingModal from '../../BookingModal/BookingModal';
 import useTitle from '../../../hooks/useTitle';
 import CategoryItem from './CategoryItem';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../../Shared/Loading/Loading';
 
 const CategoryItems = () => {
     useTitle('Category Items')
-    const categories = [
-        {
-            categoryId: "1",
-            categoryName: 'Living Room'
-        },
-        {
-            categoryId: "2",
-            categoryName: 'Dining Room'
-        },
-        {
-            categoryId: "3",
-            categoryName: 'Reading Room'
-        }
-    ];
 
     const products = useLoaderData();
     const [productBooking, setProductBooking] = useState(null);
+
+    const { data: categories = [], refetch, isLoading } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/categories');
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     // console.log(productBooking)
     return (
         <section className='w-[90%] mx-auto'>
@@ -52,7 +54,9 @@ const CategoryItems = () => {
                 productBooking &&
                 <BookingModal
                     productBooking={productBooking}
-                    setProductBooking={setProductBooking}></BookingModal>
+                    setProductBooking={setProductBooking}>
+                    refetch={refetch}
+                </BookingModal>
             }
         </section>
     );
