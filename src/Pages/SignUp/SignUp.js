@@ -28,13 +28,17 @@ const SignUp = () => {
                 updateUser(userInfo)
                     .then(() => { })
                     .catch(error => console.error(error))
-                // saveUser(data.name, data.email)
+                saveUser(data.name, data.email, data.accountType)
             })
             .catch(error => {
                 console.error(error)
                 setSignUpError(error.message);
             })
     }
+    const saveUser = (name, email, accountType) => {
+        console.log(name, email, accountType);
+    }
+
     return (
         <section className='md:h-[90vh] flex flex-col md:flex-row items-center justify-evenly'>
             <div>
@@ -71,9 +75,9 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Continue account as:</span>
                             </label>
-                            <select {...register('AccountType')} className="select select-bordered">
-                                <option disabled >select option user or buyer</option>
-                                <option>User</option>
+                            <select {...register('accountType')} className="select select-bordered">
+                                <option disabled >Select account option Buyer or Seller</option>
+                                <option>Buyer</option>
                                 <option>Seller</option>
                             </select>
                         </div>
