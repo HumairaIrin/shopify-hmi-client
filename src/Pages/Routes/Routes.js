@@ -4,6 +4,7 @@ import CategoryItems from "../Home/Categories/CategoryItems";
 import Home from "../Home/Home/Home";
 import Login from "../Login/Login";
 import Blogs from "../Shared/Blogs/Blogs";
+import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import SignUp from "../SignUp/SignUp";
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
                 element: <Blogs></Blogs>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <ErrorPage></ErrorPage>
     }
 ])
 
