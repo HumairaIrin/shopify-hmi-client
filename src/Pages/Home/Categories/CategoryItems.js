@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import BookingModal from '../../BookingModal/BookingModal';
+import useTitle from '../../../hooks/useTitle';
 import CategoryItem from './CategoryItem';
 
 const CategoryItems = () => {
+    useTitle('Category Items')
     const categories = [
         {
             categoryId: "1",
