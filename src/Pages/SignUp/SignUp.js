@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
 import furniture from '../../images/Furniture-store-2.gif';
 import { AuthContext } from '../contexts/AuthProvider';
@@ -12,7 +12,7 @@ const SignUp = () => {
     const [signUpError, setSignUpError] = useState('');
     // const [createdUserEmail, setCreatedUserEmail] = useState('');
     // const [token] = useToken(createdUserEmail)
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSignup = data => {
         setSignUpError('');
@@ -36,7 +36,23 @@ const SignUp = () => {
             })
     }
     const saveUser = (name, email, accountType) => {
-        console.log(name, email, accountType);
+        const user = {
+            name,
+            email,
+            accountType
+        }
+        fetch('http://localhost:5000/user', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                navigate('/');
+            })
     }
 
     return (
@@ -77,8 +93,8 @@ const SignUp = () => {
                             </label>
                             <select {...register('accountType')} className="select select-bordered">
                                 <option disabled >Select account option Buyer or Seller</option>
-                                <option>Buyer</option>
-                                <option>Seller</option>
+                                <option>buyer</option>
+                                <option>seller</option>
                             </select>
                         </div>
                         <input type="submit" value='Sign Up' className='btn btn-primary text-white font-semibold w-full max-w-xs mt-10' />

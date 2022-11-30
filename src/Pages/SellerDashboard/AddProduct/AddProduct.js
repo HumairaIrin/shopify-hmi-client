@@ -1,11 +1,12 @@
 import { format } from 'date-fns';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const AddProduct = () => {
     const date = new Date();
     const formatedDate = format(date, 'PP');
     const { user } = useContext(AuthContext);
+    const [categoryId, setCategoryId] = useState(null);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -18,6 +19,17 @@ const AddProduct = () => {
         const condition = form.condition.value;
         const usedTime = form.usedTime.value;
         const postedOn = formatedDate;
+        const categoryName = form.categoryName.value;
+        if (form.categoryName.value === 'Living Room') {
+            setCategoryId('1');
+        }
+        else if (form.categoryName.value === 'Dining Room') {
+            setCategoryId('2')
+        }
+        else if (form.categoryName.value === 'Reading Room') {
+            setCategoryId('3')
+        }
+
 
         const newProduct = {
             productName,
@@ -28,7 +40,9 @@ const AddProduct = () => {
             condition,
             usedTime,
             postedOn,
-            sellersName: user?.displayName
+            sellersName: user?.displayName,
+            categoryName,
+            categoryId
         }
         console.log(newProduct)
     }
@@ -44,8 +58,26 @@ const AddProduct = () => {
                     <input name='location' type="text" placeholder="Your Location" className="input input-bordered w-full" />
                     <input name='originalPrice' type="text" placeholder="Original Price" className="input input-bordered w-full" />
                     <input name='resalePrice' type="text" placeholder="Resale Price" className="input input-bordered w-full" />
-                    <input name='condition' type="text" placeholder="Product Condition" className="input input-bordered w-full" required />
+                    {/* <input name='condition' type="text" placeholder="Product Condition" className="input input-bordered w-full" required /> */}
                     <input name='usedTime' type="text" placeholder="How long you have used the product?" className="input input-bordered w-full" required />
+                    <label >
+                        <span className="label-text">Product Condition:</span>
+                    </label>
+                    <select name='condition' className='input input-bordered w-full'>
+                        <option disabled >Product Condition</option>
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Fair</option>
+                    </select>
+                    <label >
+                        <span className="label-text">Select Product Category:</span>
+                    </label>
+                    <select name='categoryName' className='input input-bordered w-full'>
+                        <option disabled >Select Product Category</option>
+                        <option>Living Room</option>
+                        <option>Dining Room</option>
+                        <option>Reading Room</option>
+                    </select>
                     <input className='btn btn-primary text-white w-full mt-5'
                         type="submit" value="Add product" />
                 </form>

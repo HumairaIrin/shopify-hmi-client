@@ -10,7 +10,7 @@ const DashboardLayout = () => {
             <Navbar></Navbar>
             <div className="drawer bg-[#e1f3d0] mt-8 drawer-mobile w-[90%] mx-auto">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content ">
+                <div className="drawer-content overflow-y-auto pb-6">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">

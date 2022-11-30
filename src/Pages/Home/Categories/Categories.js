@@ -1,36 +1,15 @@
 import React, { useEffect, useState } from 'react';
-// import category1 from '../../../images/categories/category-1.jpg';
-// import category2 from '../../../images/categories/category-2.jpg';
-// import category3 from '../../../images/categories/category-3.jpg';
 import Category from './Category';
 import axios from 'axios';
 
 const Categories = () => {
 
     const [categories, setCategories] = useState([]);
-    //     const categories = [
-    //         {
-    //             categoryId: "1",
-    //             categoryName: 'Living Room',
-    //             image: category1
-    //         },
-    //         {
-    //             categoryId: "2",
-    //             categoryName: 'Dining Room',
-    //             image: category2
-    //         },
-    //         {
-    //             categoryId: "3",
-    //             categoryName: 'Reading Room',
-    //             image: category3
-    //         }
-    //     ]
 
 
     useEffect(() => {
         axios.get('http://localhost:5000/categories')
             .then(data => {
-                // console.log(data.data)
                 setCategories(data.data);
             })
     }, [])
