@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 import Footer from '../Pages/Shared/Footer/Footer';
+import useSeller from '../hooks/useSeller';
+import { AuthContext } from '../Pages/contexts/AuthProvider';
 
 
 const DashboardLayout = () => {
+    const { user } = useContext(AuthContext);
+    const [isSeller] = useSeller(user?.email);
     return (
         <div>
             <Navbar></Navbar>
@@ -16,10 +20,14 @@ const DashboardLayout = () => {
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-[#acc494]">
-                        {/* <li><Link to='/'>My Orders</Link></li>
-                        <li><Link to='/'>Wishlist</Link></li> */}
-                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard'>Add a product</Link></li>
-                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My products</Link></li>
+                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/myOrders'>My Orders</Link></li>
+                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/wishlist'>Wishlist</Link></li>
+                        {isSeller &&
+                            <>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/addProduct'>Add a product</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My products</Link></li>
+                            </>
+                        }
                     </ul>
 
                 </div>

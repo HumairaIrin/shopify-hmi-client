@@ -9,6 +9,7 @@ import MyProducts from "../SellerDashboard/MyProducts/MyProducts";
 import Blogs from "../Shared/Blogs/Blogs";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import SignUp from "../SignUp/SignUp";
+import SellerRoute from "./SellerRoute";
 
 const router = createBrowserRouter([
     {
@@ -45,12 +46,12 @@ const router = createBrowserRouter([
         element: <DashboardLayout></DashboardLayout>,
         children: [
             {
-                path: '/dashboard',
-                element: <AddProduct></AddProduct>
+                path: '/dashboard/addProduct',
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/myProducts',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             }
         ]
     },
