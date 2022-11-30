@@ -19,7 +19,7 @@ const DashboardLayout = () => {
                         {/* <li><Link to='/'>My Orders</Link></li>
                         <li><Link to='/'>Wishlist</Link></li> */}
                         <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard'>Add a product</Link></li>
-                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/'>My products</Link></li>
+                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My products</Link></li>
                     </ul>
 
                 </div>

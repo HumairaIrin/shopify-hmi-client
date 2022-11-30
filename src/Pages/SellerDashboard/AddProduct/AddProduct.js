@@ -1,12 +1,15 @@
 import { format } from 'date-fns';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const date = new Date();
     const formatedDate = format(date, 'PP');
     const { user } = useContext(AuthContext);
     const [categoryId, setCategoryId] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -41,10 +44,27 @@ const AddProduct = () => {
             usedTime,
             postedOn,
             sellersName: user?.displayName,
+            sellersEmail: user?.email,
             categoryName,
             categoryId
         }
         console.log(newProduct)
+
+        fetch('http://localhost:5000/addProduct', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    toast.success('Product Added Successfully')
+                    navigate('/dashboard/myProducts');
+                }
+            })
     }
 
     return (
