@@ -4,11 +4,14 @@ import Navbar from '../Pages/Shared/Navbar/Navbar';
 import Footer from '../Pages/Shared/Footer/Footer';
 import useSeller from '../hooks/useSeller';
 import { AuthContext } from '../Pages/contexts/AuthProvider';
+import useAdmin from '../hooks/useAdmin';
 
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [isSeller] = useSeller(user?.email);
+    const [isAdmin] = useAdmin(user?.email);
+
     return (
         <div>
             <Navbar></Navbar>
@@ -26,6 +29,12 @@ const DashboardLayout = () => {
                             <>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/addProduct'>Add a product</Link></li>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My products</Link></li>
+                            </>
+                        }
+                        {isAdmin &&
+                            <>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/'>All Buyers</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/'>All Sellers</Link></li>
                             </>
                         }
                     </ul>
