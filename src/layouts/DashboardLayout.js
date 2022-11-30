@@ -5,10 +5,14 @@ import Footer from '../Pages/Shared/Footer/Footer';
 import useSeller from '../hooks/useSeller';
 import { AuthContext } from '../Pages/contexts/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
+import useBuyer from '../hooks/useBuyer';
+import useTitle from '../hooks/useTitle';
 
 
 const DashboardLayout = () => {
+    useTitle('Dashboard');
     const { user } = useContext(AuthContext);
+    const [isBuyer] = useBuyer(user?.email);
     const [isSeller] = useSeller(user?.email);
     const [isAdmin] = useAdmin(user?.email);
 
@@ -23,17 +27,21 @@ const DashboardLayout = () => {
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-[#acc494]">
-                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/myOrders'>My Orders</Link></li>
-                        <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/wishlist'>Wishlist</Link></li>
+                        {isBuyer &&
+                            <>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/myOrders'>My Orders</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/wishlist'>Wishlist</Link></li>
+                            </>}
                         {isSeller &&
                             <>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/addProduct'>Add a product</Link></li>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My products</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My Buyers</Link></li>
                             </>
                         }
                         {isAdmin &&
                             <>
-                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/'>All Buyers</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/allBuyers'>All Buyers</Link></li>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/'>All Sellers</Link></li>
                             </>
                         }

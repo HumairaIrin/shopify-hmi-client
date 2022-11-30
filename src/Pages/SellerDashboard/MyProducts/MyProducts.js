@@ -18,13 +18,16 @@ const MyProducts = () => {
     })
 
     return (
-        <div className='grid gap-4 grid-cols-1'>
-            {
-                myProducts.map((product, i) => <MyProduct
-                    key={i}
-                    product={product}
-                ></MyProduct>)
-            }
+        <div>
+            <h3 className="my-3 px-3 text-center text-2xl font-bold">My Products</h3>
+            <div className='grid gap-4 grid-cols-1'>
+                {
+                    myProducts.map((product, i) => <MyProduct
+                        key={i}
+                        product={product}
+                    ></MyProduct>)
+                }
+            </div>
         </div>
     );
 };

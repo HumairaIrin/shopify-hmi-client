@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoVerified } from 'react-icons/go';
+import useBuyer from '../../../hooks/useBuyer';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const CategoryItem = ({ product, setProductBooking }) => {
     const { productName, image, location, originalPrice, resalePrice, condition, usedTime, postedOn, sellersName } = product;
+    const { user } = useContext(AuthContext);
+    const [isBuyer] = useBuyer(user?.email);
     return (
         <div className="p-4">
             <div className="h-full flex flex-col lg:flex-row border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -32,6 +36,9 @@ const CategoryItem = ({ product, setProductBooking }) => {
                         Seller Name: <span className='text-gray-600'>{sellersName}<span className='inline-block ml-2'><GoVerified /></span></span>
                     </h2>
                     <label htmlFor="booking-modal" className='btn btn-primary text-white w-full' onClick={() => setProductBooking(product)}>Book Now</label>
+                    {isBuyer &&
+                        <label htmlFor="booking-modal" className='btn btn-primary text-white w-full' onClick={() => setProductBooking(product)}>Add to wishlist</label>
+                    }
                 </div>
             </div>
         </div>
