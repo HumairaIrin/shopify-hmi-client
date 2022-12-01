@@ -50,7 +50,7 @@ const AddProduct = () => {
         }
         console.log(newProduct)
 
-        fetch('http://localhost:5000/addProduct', {
+        fetch('https://resale-market-server-psi.vercel.app/addProduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

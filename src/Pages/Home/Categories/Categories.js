@@ -8,7 +8,7 @@ const Categories = () => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/categories')
+        axios.get('https://resale-market-server-psi.vercel.app/categories')
             .then(data => {
                 setCategories(data.data);
             })

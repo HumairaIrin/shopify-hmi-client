@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import Main from "../../layouts/Main";
 import AllBuyers from "../AdminDashboard/AllBuyers/AllBuyers";
+import AllSellers from "../AdminDashboard/AllSellers/AllSellers";
 import CategoryItems from "../Home/Categories/CategoryItems";
 import Home from "../Home/Home/Home";
 import Login from "../Login/Login";
@@ -11,6 +12,7 @@ import Blogs from "../Shared/Blogs/Blogs";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import SignUp from "../SignUp/SignUp";
 import SellerRoute from "./SellerRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -31,9 +33,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/categoryItems/:categoryName',
-                element: <CategoryItems></CategoryItems>,
+                element: <PrivateRoute><CategoryItems></CategoryItems></PrivateRoute>,
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/products/${params.categoryName}`)
+                    return fetch(`https://resale-market-server-psi.vercel.app/products/${params.categoryName}`)
                 }
             },
             {
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <DashboardLayout></DashboardLayout>,
         children: [
+            // {
+            //     path: '/dashboard',
+            //     element: <AddProduct></AddProduct>
+            // },
             {
                 path: '/dashboard/addProduct',
                 element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
@@ -54,9 +60,17 @@ const router = createBrowserRouter([
                 path: '/dashboard/myProducts',
                 element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
+            // {
+            //     path: '/dashboard',
+            //     element: <AllBuyers></AllBuyers>
+            // },
             {
                 path: '/dashboard/allBuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/dashboard/allSellers',
+                element: <AllSellers></AllSellers>
             }
         ]
     },

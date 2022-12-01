@@ -15,7 +15,7 @@ const CategoryItems = () => {
     const { data: categories = [], refetch, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://resale-market-server-psi.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -32,7 +32,7 @@ const CategoryItems = () => {
             <div className='flex justify-start overflow-x-auto'>
                 {
                     categories.map(category =>
-                        <Link to={`/categoryItems/${category.categoryId}`} key={category.categoryId}>
+                        <Link to={`/categoryItems/${category.categoryName}`} key={category.categoryId}>
                             <button
                                 className="btn btn-outline btn-primary mr-2">
                                 {category.categoryName}
