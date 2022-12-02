@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { GoVerified } from 'react-icons/go';
 import useBuyer from '../../../hooks/useBuyer';
+import useVerified from '../../../hooks/useVerified';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const CategoryItem = ({ product, setProductBooking }) => {
     const { productName, image, location, originalPrice, resalePrice, condition, usedTime, postedOn, sellersName } = product;
     const { user } = useContext(AuthContext);
     const [isBuyer] = useBuyer(user?.email);
+    const [isVerfied] = useVerified(product.sellersEmail);
     return (
         <div className="p-4">
             <div className="h-full flex flex-col lg:flex-row border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -33,11 +35,16 @@ const CategoryItem = ({ product, setProductBooking }) => {
                         Posted On: <span className='text-gray-600'>{postedOn}</span>
                     </h2>
                     <h2 className="tracking-widest flex items-center text-xs title-font font-medium text-gray-400 mb-5">
-                        Seller Name: <span className='text-gray-600'>{sellersName}<span className='inline-block ml-2'><GoVerified /></span></span>
+                        Seller Name: <span className='text-gray-600'>{sellersName}
+                            {
+                                isVerfied &&
+                                <span className='inline-block ml-2'><GoVerified /></span>
+                            }
+                        </span>
                     </h2>
                     <label htmlFor="booking-modal" className='btn btn-primary text-white w-full' onClick={() => setProductBooking(product)}>Book Now</label>
                     {isBuyer &&
-                        <label htmlFor="booking-modal" className='btn btn-primary text-white w-full' onClick={() => setProductBooking(product)}>Add to wishlist</label>
+                        <label htmlFor="booking-modal" className='btn btn-primary text-white w-full mt-2'>Add to wishlist</label>
                     }
                 </div>
             </div>
