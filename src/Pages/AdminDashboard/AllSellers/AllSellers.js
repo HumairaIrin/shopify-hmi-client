@@ -2,14 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import useTitle from '../../../hooks/useTitle';
-// import useVerified from '../../../hooks/useVerified';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllSellers = () => {
     useTitle('All Sellers')
     const type = 'seller';
     const [deleteSeller, setDeleteSeller] = useState(null);
-    // const [isVerfied] = useVerified()
 
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ['users', 'sellers', type],

@@ -29,20 +29,21 @@ const DashboardLayout = () => {
                     <ul className="menu p-4 w-80 bg-[#acc494]">
                         {isBuyer &&
                             <>
-                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/myOrders'>My Orders</Link></li>
-                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/wishlist'>Wishlist</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to=''>My Orders</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to=''>Wishlist</Link></li>
                             </>}
                         {isSeller &&
                             <>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/addProduct'>Add a product</Link></li>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My products</Link></li>
-                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/myProducts'>My Buyers</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to=''>My Buyers</Link></li>
                             </>
                         }
                         {isAdmin &&
                             <>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/allBuyers'>All Buyers</Link></li>
                                 <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/allSellers'>All Sellers</Link></li>
+                                <li className='bg-[#e1f3d0] p-4 mb-3 rounded-lg font-semibold'><Link to='/dashboard/reportedItems'>Reported Items</Link></li>
                             </>
                         }
                     </ul>

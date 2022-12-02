@@ -3,9 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../images/logo.png';
 import { FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useAdmin from '../../../hooks/useAdmin';
+import useSeller from '../../../hooks/useSeller';
+import useBuyer from '../../../hooks/useBuyer';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email);
+    const [isSeller] = useSeller(user?.email);
+    const [isBuyer] = useBuyer(user?.email);
     const navigate = useNavigate();
     const handleLogOut = () => {
         logOut()
@@ -17,7 +23,18 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         {user?.email ?
             <>
-                <li><Link to="/dashboard">Dashboard</Link></li>
+                {
+                    isBuyer &&
+                    <li><Link to="/dashboard">Dashboard</Link></li>
+                }
+                {
+                    isSeller &&
+                    <li><Link to="/dashboard/addProduct">Dashboard</Link></li>
+                }
+                {
+                    isAdmin &&
+                    <li><Link to="/dashboard/allBuyers">Dashboard</Link></li>
+                }
                 <li><Link to="/blogs">Blogs</Link></li>
                 <li><button onClick={handleLogOut} >Sign Out</button></li>
                 {user?.photoURL ?

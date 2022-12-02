@@ -8,7 +8,7 @@ const MyProducts = () => {
     useTitle('My Products')
     const { user } = useContext(AuthContext);
     // const email = user?.email;
-    const { data: myProducts = [] } = useQuery({
+    const { data: myProducts = [], refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
             const res = await fetch(`https://resale-market-server-psi.vercel.app/myProducts?email=${user?.email}`);
@@ -25,6 +25,7 @@ const MyProducts = () => {
                     myProducts.map((product, i) => <MyProduct
                         key={i}
                         product={product}
+                        refetch={refetch}
                     ></MyProduct>)
                 }
             </div>
